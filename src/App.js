@@ -10,31 +10,58 @@ class App extends Component {
   
   constructor(){
     super();
-    this.state = {lista : []};
+    this.state = {lista : [],nome :'', email : '', senha: ''};
   }
 
 
   componentWillMount(){
     console.log('componentWillMount');
     $.ajax({
-        url : 'http://localhost:3001/api/autores',
+        url : 'http://localhost:8000/api/autores',
         method : 'get',
+        type: 'GET',
         dataType: 'jsonp',
-
-
         success : function(result){
           console.log('sucesso');
-          this.setState({lista: result}).bind(this);
+          this.setState({lista: result});
 
         }.bind(this),
-        error : function (result){
-          console.log('deu errroooo');
+        error :function(result){
+
+          console.log('ocorreu um erro ao realizar o ajax');
           console.log(result);
+
         }.bind(this)
     });
+  }
 
+  enviaForm(event){
 
+    event.preventDefault();
 
+    console.log('enviando form.....');
+
+    console.log(event.target);
+
+    console.log(this.nome);
+
+    $.ajax({
+        url:"http//localhost:8080/api/autores",
+        contentType: 'application/json', //enviados 
+        dataType:'json', //resposta
+        type:'post',
+        data: JSON.stringify({
+          nome:this.state.nome,
+          email:this.state.nome,
+          senha:this.state.nome}),
+        sucess: function(resposta){
+          console.log("enviado com sucesso");
+        },
+        error: function(resposta){
+            console.log("erro");
+        }
+
+    });
 
   }
 
@@ -72,28 +99,29 @@ class App extends Component {
 
         <div className="content">
 
-          <form className="pure-form pure-form-aligned">
+          <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm}>
                   <fieldset>
                       <div className="pure-control-group">
                           <label htmlFor="name">Nome</label>
-                          <input id="name" type="text" placeholder="Nome"/>
+                          <input id="name" type="text" placeholder="Nome" value={this.state.nome} />
                       </div>
 
                       <div className="pure-control-group">
                           <label htmlFor="email">Email Address</label>
-                          <input id="email" type="email" placeholder="Email Address"/>
+                          <input id="email" type="email" placeholder="Email Address" value={this.state.email}/>
                       </div>
 
                       <div className="pure-control-group">
                           <label htmlFor="password">Password</label>
-                          <input id="password" type="password" placeholder="Password"/>
+                          <input id="password" type="password" placeholder="Password"  value={this.state.senha}/>
                       </div>                      
               
 
               
                       <div className="pure-controls">
 
-                          <button type="submit" className="pure-button pure-button-primary">Submit</button>
+                          <button type="submit" className="pure-button pure-button-primary" 
+                          >Submit</button>
                       </div>
                   </fieldset>
               </form>
@@ -111,7 +139,7 @@ class App extends Component {
                   {
                     this.state.lista.map(function(autor){
                       return(
-                        <tr>
+                        <tr key={autor.id}>
                           <td>{autor.nome}</td>
                           <td>{autor.email}</td>
                         </tr>
