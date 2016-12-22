@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 
 class InputCustomizado extends Component {
 
-	constructor(){
-		super();
-	}
+
 
 	render(){
 

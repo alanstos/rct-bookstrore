@@ -2,13 +2,13 @@ import React , {Component} from 'react';
 import FormularioAutor from './FormularioAutor';
 import TabelaAutores from './TabelaAutores';
 import $ from 'jquery';
+import PubSub from 'pubsub-js';
 
 class AutorBox extends Component {
 
 	constructor(){
     	super();
     	this.state = {lista : []};
-    	this.atualizaListagem = this.atualizaListagem.bind(this);
     }
 
 	componentDidMount(){
@@ -30,19 +30,20 @@ class AutorBox extends Component {
 
 	        }.bind(this)
 	    });
-	  }  
 
-	  atualizaListagem(novaLista){
-	  	console.log(' box atualizando listagem....');
-	  	this.setState({lista: novaLista});
-	  }
+		PubSub.subscribe('atualiza-lista-autores', function(topico,novaLista){
+			console.log('pub sub ouvintes ...');
+			this.setState({lista: novaLista});
+		}.bind(this));
+
+	  }  
 
 	render() {
 
 		return (
 
 			<div>
-           		<FormularioAutor callbackAtualizaListagem={this.atualizaListagem} />
+           		<FormularioAutor  />
 
            		<TabelaAutores lista={this.state.lista} />
            	</div>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import InputCustomizado from '../componentes/InputCustomizado';
 import ButtonController from '../componentes/ButtonController';
 import $ from 'jquery';
+import PubSub from 'pubsub-js';
 
 class FormularioAutor extends Component {
 
@@ -42,7 +43,8 @@ class FormularioAutor extends Component {
           //this.setState({lista:resposta});
 
 
-          this.props.callbackAtualizaListagem(resposta);
+          //this.props.callbackAtualizaListagem(resposta);
+          PubSub.publish('atualiza-lista-autores',resposta);
 
         }.bind(this),
         error: function(resposta){
