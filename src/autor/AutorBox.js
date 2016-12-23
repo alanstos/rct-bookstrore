@@ -28,7 +28,7 @@ class AutorBox extends Component {
 	          console.log('ocorreu um erro ao realizar o ajax');
 	          console.log(result);
 
-	        }.bind(this)
+	        }
 	    });
 
 		PubSub.subscribe('atualiza-lista-autores', function(topico,novaLista){

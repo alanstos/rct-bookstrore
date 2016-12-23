@@ -19,9 +19,6 @@ class FormularioAutor extends Component {
 	    console.log('constructor app - fim');    	
     }	
 
-
-
-
   enviaForm(event){
 
     event.preventDefault();
@@ -45,6 +42,8 @@ class FormularioAutor extends Component {
 
           //this.props.callbackAtualizaListagem(resposta);
           PubSub.publish('atualiza-lista-autores',resposta);
+          
+          this.setState({nome:'',email:'',senha:''});
 
         }.bind(this),
         error: function(resposta){
@@ -52,15 +51,16 @@ class FormularioAutor extends Component {
             console.log(resposta.status);
             console.log(resposta);
 
-            if (resposta.status == 400){
+            if (resposta.status === 400){
 
             	new TratadorErros().publicaErros(resposta.responseJSON);
             	
             }
         },
-		beforeSend: function(){
+		    beforeSend: function(){
       		PubSub.publish("limpa-erros",{});
-    	}        
+
+    	  }       
 
     });
   }
@@ -82,21 +82,21 @@ class FormularioAutor extends Component {
 		return (
 
           <form className="pure-form pure-form-aligned" method="POST" onSubmit={this.enviaForm}>
-                  <fieldset>
+              <fieldset>
 
-                      <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} 
-                      placeholder="Nome" label="Nome" />
+                  <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} 
+                  placeholder="Nome" label="Nome" />
 
-                      <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} 
-                      placeholder="Digite seu e-mail" label="E-mail" />
+                  <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} 
+                  placeholder="Digite seu e-mail" label="E-mail" />
 
-                      <InputCustomizado id="password" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} 
-                      placeholder="Sua senha" label="Senha" />   
+                  <InputCustomizado id="password" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} 
+                  placeholder="Sua senha" label="Senha" />   
 
-                      <ButtonController label="Enviar" />                                         
-              
-                      
-                  </fieldset>
+                  <ButtonController label="Enviar" />                                         
+          
+                  
+              </fieldset>
            </form>
 			);
 	}

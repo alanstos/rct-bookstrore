@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
-
-
-
 
 class TabelaAutores extends Component {
 
-	constructor(){
-		super();
-		
-	}
 
 
 

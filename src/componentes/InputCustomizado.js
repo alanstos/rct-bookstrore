@@ -30,7 +30,7 @@ class InputCustomizado extends Component {
 
       <div className="pure-control-group">
           <label htmlFor={this.props.id}>{this.props.label}</label>
-          <input id={this.props.id} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.nome} onChange={this.props.onChange} />
+          <input id={this.props.id} name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} />
           <span className="erro">{this.state.msgCampo}</span>
       </div>	
 
