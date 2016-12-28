@@ -41,11 +41,15 @@ class AutorBox extends Component {
 	render() {
 
 		return (
-
 			<div>
-           		<FormularioAutor  />
+		        <div className="header">
+		            <h1>Cadastro de Autor</h1>
+		        </div>
+				<div>
+	           		<FormularioAutor  />
 
-           		<TabelaAutores lista={this.state.lista} />
+	           		<TabelaAutores lista={this.state.lista} />
+	           	</div>
            	</div>
 		);
 
