@@ -43,7 +43,7 @@ class AutorBox extends Component {
 		return (
 			<div>
 		        <div className="header">
-		            <h1>Cadastro de Autor</h1>
+		            <h2>Cadastro de Autor</h2>
 		        </div>
 				<div>
 	           		<FormularioAutor  />
