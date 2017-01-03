@@ -9,7 +9,7 @@ class LivroBox extends Component {
 	constructor(){
 		super();
 		//this.state = {lista : [ {id:'1',titulo:'Livro 123',preco : '20,40', autor:'Obama'} ]};
-		this.state = {lista : [  ]};
+		this.state = {lista : [  ],autores :[]};
 	}
 
 	componentDidMount(){
@@ -31,6 +31,24 @@ class LivroBox extends Component {
 	        }
 	    });
 
+	    $.ajax({
+	        url : 'http://localhost:8000/api/autores',
+	        method : 'get',
+	        type: 'GET',
+	        dataType: 'jsonp',
+	        success : function(result){
+	          console.log('sucesso');
+	          this.setState({autores: result});
+
+	        }.bind(this),
+	        error :function(result){
+
+	          console.log('ocorreu um erro ao realizar o ajax');
+	          console.log(result);
+
+	        }
+	    });	   
+
 	    //config 
 		PubSub.subscribe('atualiza-lista-livro', function(topico,novaLista){
 			console.log('pub sub ouvintes livros ...');
@@ -46,7 +64,7 @@ class LivroBox extends Component {
 		            <h2>Cadastro de livro</h2>
 		        </div>
 				<div>
-	           		<FormularioLivro />
+	           		<FormularioLivro autores={this.state.autores}/>
 
 	           		<TabelaLivros lista={this.state.lista} />
 	           	</div>

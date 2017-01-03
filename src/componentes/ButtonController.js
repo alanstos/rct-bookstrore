@@ -8,7 +8,7 @@ class ButtonController extends Component {
 
           <div className="pure-controls">
 
-              <button type="submit" className="pure-button pure-button-primary" >{this.props.label}</button>
+              <button type={this.props.type} className="pure-button pure-button-primary" onClick={this.props.onClick} >{this.props.label}</button>
           </div>		
 
 		);

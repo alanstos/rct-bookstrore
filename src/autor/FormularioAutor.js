@@ -26,7 +26,7 @@ class FormularioAutor extends Component {
     var idAutor = new Date().getMilliseconds();
 
     $.ajax({
-        url:'http://localhost:8000/api/livros/grava',
+        url:'http://localhost:8000/api/autores/grava',
         contentType: 'application/json', //enviados 
         dataType:'json', //resposta
         type:'POST',
