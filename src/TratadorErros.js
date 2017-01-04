@@ -12,6 +12,16 @@ class TratadorErros {
 		}
 	}
 
+	publicaErrosLivros(erros){
+		console.log('bateu no tratar erros livros ... ');
+
+		for (var i =0 ; i < erros.length ; i++){
+			console.log(erros[i]);
+			var erro = erros[i];
+			PubSub.publish('validacao-input-livros',erro);
+		}
+	}	
+
 }
 
 export default TratadorErros;

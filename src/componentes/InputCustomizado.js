@@ -19,6 +19,17 @@ class InputCustomizado extends Component {
 
 		}.bind(this));
 
+
+		PubSub.subscribe("validacao-input-livros",function(topico,erro){
+
+			console.log('entrou no did mount do InputCustomizado');
+
+			if(erro.param === this.props.name){
+				this.setState({ msgCampo : erro.msg }); 
+			}
+
+		}.bind(this));		
+
 		PubSub.subscribe("limpa-erros",function(topico){                        
 			this.setState({msgCampo:''});                        
 		}.bind(this)); 		

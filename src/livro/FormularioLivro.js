@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import InputCustomizado from '../componentes/InputCustomizado';
 import ButtonController from '../componentes/ButtonController';
 import ComboBox from '../componentes/ComboBox';
+import TratadorErros from '../TratadorErros';
 import PubSub from 'pubsub-js';
 import $ from 'jquery';
 
@@ -49,6 +50,7 @@ class FormularioLivro extends Component {
 	          id : idLivro,
 	          titulo:this.state.titulo,
 	          preco:this.state.preco,
+	      	  autorId: this.state.autor,
 	      	  autor: this.state.autor}),
 	        success: function(resposta){
 	          console.log('enviado com sucesso');
@@ -65,12 +67,12 @@ class FormularioLivro extends Component {
 
 	            if (resposta.status === 400){
 
-	            	//new TratadorErros().publicaErros(resposta.responseJSON);
+	            	new TratadorErros().publicaErrosLivros(resposta.responseJSON);
 	            	
 	            }
 	        },
 			beforeSend: function(){
-	      		//PubSub.publish("limpa-erros",{});
+	      		PubSub.publish("limpa-erros",{});
 
 	    	}       
 
@@ -95,8 +97,7 @@ class FormularioLivro extends Component {
                   <InputCustomizado id="preco" type="text" name="preco" value={this.state.preco} onChange={this.setPreco} 
                   placeholder="Digite o preço do livro" label="Preço" />
 
-
-                  <ComboBox id="autoresid" label="Autor" value={this.state.autor} autores={this.props.autores} onChange={this.setAutor} />
+                  <ComboBox id="autoresid" label="Autor" name="autor" value={this.state.autor} autores={this.props.autores} onChange={this.setAutor} />
 
                   <ButtonController type="submit" label="Gravar livro" />                                         
 
