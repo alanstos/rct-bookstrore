@@ -13,9 +13,7 @@ class FormularioAutor extends Component {
 	    console.log('constructor app - inicio');
 	    this.state = {nome :'', email : '', senha: ''};
 	    this.enviaForm = this.enviaForm.bind(this);
-	    this.setNome = this.setNome.bind(this);
-	    this.setEmail = this.setEmail.bind(this);
-	    this.setSenha = this.setSenha.bind(this);
+      //this.salvaAlteracao = this.salvaAlteracao.bind(this);
 	    console.log('constructor app - fim');    	
     }	
 
@@ -65,17 +63,11 @@ class FormularioAutor extends Component {
     });
   }
 
-  setNome(event){
-    this.setState({nome : event.target.value});
-  }
-
-  setEmail(event){
-    this.setState({email : event.target.value});
-  }
-
-  setSenha(event){
-    this.setState({senha : event.target.value});
-  }    
+  salvaAlteracao(nomeInput, event){
+    var campo = {};
+    campo[nomeInput] = event.target.value; //usando conchetes ou 
+    this.setState(campo); // this.setState({[nomeInput]:event.target.value})
+  } 
 
 	render(){
 
@@ -84,13 +76,13 @@ class FormularioAutor extends Component {
           <form className="pure-form pure-form-aligned" method="POST" onSubmit={this.enviaForm}>
               <fieldset>
 
-                  <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} 
+                  <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.salvaAlteracao.bind(this,'nome')} 
                   placeholder="Nome" label="Nome" />
 
-                  <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} 
+                  <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.salvaAlteracao.bind(this,'email')} 
                   placeholder="Digite seu e-mail" label="E-mail" />
 
-                  <InputCustomizado id="password" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} 
+                  <InputCustomizado id="password" type="password" name="senha" value={this.state.senha} onChange={this.salvaAlteracao.bind(this,'senha')} 
                   placeholder="Sua senha" label="Senha" />   
 
                   <ButtonController label="Enviar" />                                         

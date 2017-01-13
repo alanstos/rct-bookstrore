@@ -1246,3 +1246,7 @@ It is reported that `npm run build` can fail on machines with no swap space, whi
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
 >>>>>>> inicio app estudo
+
+npm install pushstate-server
+
+./node_modules/.bin/pushstate-server build/
